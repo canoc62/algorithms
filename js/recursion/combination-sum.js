@@ -20,30 +20,23 @@ A solution set is:
  * @return {number[][]}
  */
 
-function sum(array) {
-    let sum = 0;
-    
-    for (let i = 0; i < array.length; i += 1) {
-        sum += array[i];
-    }
-    return sum;
+function combinationSum(candidates, target) {
+ 
+ const solutions = [];
+ const copyCandidates = candidates.slice();
+ 
+ function recurse(currCandidates, solutionSet = [], currSum = 0) {
+   
+   for (let i = 0; i < currCandidates.length; i += 1) {
+     if (currSum + currCandidates[i] < target) {
+       recurse(currCandidates.slice(i), solutionSet.concat(currCandidates[i]), currSum + currCandidates[i]);
+     } else if (currSum + currCandidates[i] === target) {
+       solutions.push(solutionSet.concat(currCandidates[i]));
+     }
+   }
+ }
+ 
+ recurse(copyCandidates);
+ 
+ return solutions;
 }
-
-var combinationSum = function(candidates, target) {
-    
-    const solutions = [];
-    
-    function addSum(numbers, currSum) {
-        // if (currSum === target) {
-        //     solutions.push([])
-        // }
-        for (let i = 0; i < numbers.length; i += 1) {
-            
-            while (true) {
-                if (currSum += numbers[i] < ) {
-                    
-                }
-            }
-        }
-    }
-};
