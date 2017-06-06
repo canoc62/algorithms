@@ -47,58 +47,6 @@ expectations = {
 // For each number in the sequence, I need to get the possible combination of other numbers (the next numbers in the sequence) in the sequence.
 // for the 0th index in the sequence, I need to get the possible combination of for the sequence.slice(1)
 
-
-// const adjacents = {
-//   '0': ['0', '8'],
-//   '1': ['1', '2', '4'],
-//   '2': ['2', '1', '3', '5'],
-//   '3': ['3', '2', '6'],
-//   '4': ['4', '5', '7'],
-//   '5': ['5', '2', '4', '6', '8'],
-//   '6': ['6', '3', '5', '9'],
-//   '7': ['7', '4', '8'],
-//   '8': ['8', '5', '7', '9', '0'],
-//   '9': ['9', '6', '8']
-// }
-
-// function getPINs(observed) {
-
-//   // const len = observed.length;
-//   // const adjacentsArr = [];
-
-//   // for (let i = 0; i < observed.length; i += 1) {
-//   //   for (let j = 0; j < adjacent[observed]; j +=1) {
-
-//   //   }
-//   // }
-
-//   // function getCombos(prev = '', letter) { 
-
-//   //   for(let j = 0; j < adjacents[letter].length; j += 1) {
-//   //     adjacentsArr.push(adjacents[observed[i]]);
-//   //   }
-//   // }
-
-//   //const combos = [];
-
-//   function getCombos(observed) {
-//     if (observed.length <= 1) {
-//       return adjacents[observed];
-//     }
-
-//     const remaining = getCombos(observed.slice(1));
-//     const combos = [];
-//     for (let i = 0; i < adjacents[observed][0]; i += 1) {
-//       for (let j = 0; j < remaining.length; j += 1) {
-//         combos = combos.concat((adjacents[observed][0]).concat(remaining[j]));
-//       }
-//     }
-
-//     return combos;
-//   }
-
-//   return getCombos(observed);
-// }
 const adjacents = {
   0: ['8', '0'],
   1: ['1', '2', '4'],
