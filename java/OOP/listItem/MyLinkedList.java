@@ -54,14 +54,14 @@ public class MyLinkedList implements MyList {
     }
 
     @Override
-    public boolean removeItem(ListItem Item) {
+    public boolean removeItem(ListItem item) {
         ListItem curr = this.head;
 
         while (curr != null) {
             if (curr.compareTo(item) == 0) {
-                if (curr == this.root) {
-                    this.root = curr.next();
-                    //this.root.setPrevious(null);
+                if (curr == this.head) {
+                    this.head = curr.next();
+                    //this.head.setPrevious(null);
                 } else {
                     curr.previous().setNext(curr.next());
                     if (curr.next() != null) {
