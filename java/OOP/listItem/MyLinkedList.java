@@ -49,7 +49,7 @@ public class MyLinkedList implements MyList {
                     return false;
                 }
             }
-
+            return false;
         }
     }
 
