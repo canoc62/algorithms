@@ -24,6 +24,33 @@ makeChange(1) === 1
 makeChange(2) === 2
 */
 
-function coinSum() {
+const values = [1, 2, 5, 10, 20, 50, 100, 200];
 
+function coinSum(valsArr, targetSum, index) {
+  let coinValueTotal = 0;
+  let solutions = 0;
+
+  if (targetSum === 0) return 1;
+  if (index >= valsArr.length) return 0;
+
+  let remaining;
+  while (coinValueTotal <= targetSum) {
+    remaining = targetSum - coinValueTotal;
+    solutions += coinSum(valsArr, remaining, index + 1);
+    coinValueTotal += valsArr[index];
+  }
+
+  return solutions;
 }
+
+// const vals1 = [5, 2];
+
+// console.log(coinSum(vals1, 10, 0));
+
+
+
+
+
+
+
+
