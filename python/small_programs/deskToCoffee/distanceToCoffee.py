@@ -1,15 +1,59 @@
 from nodes import Node
 
 def distanceToCoffee(rows, cols, deskLocation, coffeeLocations, walls):
+  checkTypeArgs(rows, cols, deskLocation, coffeeLocations, walls)
+
+  validateCoordinate(deskLocation, rows, cols)
   print("Desk located at: {}, {}\n".format(deskLocation[0], deskLocation[1]))
 
+  grid = constructGrid(rows, cols, coffeeLocations, walls)
+
+  return search(grid, deskLocation)
+
+
+def checkTypeArgs(rows, cols, deskLocation, coffeeLocations, walls):
+  if isinstance(rows, int) == False:
+    raise TypeError("rows argument must be an instance of \'int\'")
+  if isinstance(cols, int) == False:
+    raise TypeError("cols argument must be an instance of \'int\'")
+  if isinstance(deskLocation, list) == False:
+    raise TypeError("deskLocation argument must be an instance of \'list\'")
+  if isinstance(coffeeLocations, list) == False:
+    raise TypeError("coffeeLocations argument must be an instance of \'list\'")
+  if isinstance(walls, list) == False:
+    raise TypeError("walls argument must be an instance of \'list\'")
+
+
+def validateCoordinate(coordinate, rows, cols):
+  if isinstance(coordinate, list) == False:
+      raise TypeError("Coordinate container must"
+                      " be an instance of \'list\'")
+
+  checkForInt(coordinate[0])
+  checkForInt(coordinate[1])
+  checkForInBoundaryValue(coordinate[0], coordinate[1], rows, cols)
+
+
+def checkForInt(value):
+  if isinstance(value, int) == False:
+    raise TypeError("value must be an instance of \'int\'")
+
+
+def checkForInBoundaryValue(value1, value2, rows, cols):
+  if value1 < 1 or value1 > rows or \
+       value2 < 1 or value2 > cols:
+      raise AssertionError("Coordinate values must lie between"
+                           " the rows and columns values provided")
+
+
+def constructGrid(rows, cols, coffeeLocations, walls):
   nodes = createNodes(rows, cols)
-  addCoffeesAndWalls(nodes, coffeeLocations, walls)
+  addCoffeesAndWalls(nodes, coffeeLocations, walls, rows, cols)
   addNeighbors(nodes, rows, cols)
   printGrid(nodes, rows, cols)
 
-  return search(nodes, deskLocation)
-
+  return nodes
+  
 
 def printGrid(nodes, rows, cols):
   for i in range(1, rows + 1):
@@ -30,13 +74,19 @@ def createNodes(rows, cols):
   return nodes
 
 
-def addCoffeesAndWalls(nodes, coffeeLocations, walls):
-  for loc in range(len(coffeeLocations)):
-    coffeeKey = str(coffeeLocations[loc][0]) + str(coffeeLocations[loc][1])
+def addCoffeesAndWalls(nodes, coffeeLocations, walls, rows, cols):
+  for location in range(len(coffeeLocations)):
+    coffeeCoordinate = coffeeLocations[location]
+    validateCoordinate(coffeeCoordinate, rows, cols)
+    
+    coffeeKey = str(coffeeCoordinate[0]) + str(coffeeCoordinate[1])
     nodes[coffeeKey].symbol = 'c'
 
-  for wall in range(len(walls)):
-    wallKey = str(walls[wall][0]) + str(walls[wall][1])
+  for location in range(len(walls)):
+    wallCoordinate = walls[location]
+    validateCoordinate(wallCoordinate, rows, cols)
+
+    wallKey = str(wallCoordinate[0]) + str(wallCoordinate[1])
     nodes[wallKey].symbol = 'x'
 
 
@@ -52,7 +102,8 @@ def createNeighbors(node, nodeList, rows, cols):
     neighborX = node.x + directions[i][0]
     neighborY = node.y + directions[i][1]
 
-    if (neighborX < 1 or neighborX >= rows + 1 or neighborY < 1 or neighborY >= cols + 1):
+    if (neighborX < 1 or neighborX >= rows + 1 \
+        or neighborY < 1 or neighborY >= cols + 1):
       continue
 
     keyOfNeighbor = str(neighborX) + str(neighborY)
@@ -70,7 +121,6 @@ def search(nodes, deskLocation):
   level = 0
 
   while queue:
-
     next = []
 
     for node in range(len(queue)):
