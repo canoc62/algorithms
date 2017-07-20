@@ -1,35 +1,8 @@
 from nodes import Node
 
-# def distanceToCoffee(rows, cols, deskLocation, coffeeLocations, walls):
-#   nodes = []
-
-#   for i in range(rows):
-#     for j in range(cols):
-#       nodes.append(Node(i, j))
-  
-
-# def createNeighbors(node, nodeList, rows, cols):
-
-#   directions = [[0, 1], [-1, 0], [0, -1], [1, 0]]
-
-#   for i in range(len(directions)):
-#     neighborX = node.x + directions[i][0]
-#     neighborY = node.y + directions[i][1]
-
-#     if (neighborX < 0 or neighborX >= rows or neighborY < 0 or neighborY >= cols):
-#       continue
-
-#     indexOfNeighbor = neighborX * rows + neighborY
-#     potentialNeighbor = nodeList[indexOfNeighbor]
-
-#     if (potentialNeighbor.symbol == 'x'):
-#       continue
-#     node.neighbors.append(potentialNeighbor)
-
-
 def distanceToCoffee(rows, cols, deskLocation, coffeeLocations, walls):
 
-  print("desk located at {}, {}".format(deskLocation[0], deskLocation[1]))
+  print("Desk located at: {}, {}\n".format(deskLocation[0], deskLocation[1]))
 
   nodes = {}
 
@@ -101,7 +74,9 @@ def search(nodes, deskLocation):
 
   return -1
 
-coffees = [[0, 2], [2, 1]]
-walls = [[1, 1], [1, 2], [2, 0]]
+# coffees = [[0, 2], [2, 1]]
+# walls = [[1, 1], [1, 2], [2, 0]]
+coffees = [[0, 0]]
+walls = [[1, 0], [1, 1], [1, 2], [1, 3], [2, 0], [2, 1], [2, 2], [2, 3]]
 
-print(distanceToCoffee(3, 4, [2,3], coffees, walls))
+print(distanceToCoffee(4, 5, [3,0], coffees, walls))
