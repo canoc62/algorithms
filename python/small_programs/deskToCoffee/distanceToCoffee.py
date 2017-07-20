@@ -6,14 +6,17 @@ def distanceToCoffee(rows, cols, deskLocation, coffeeLocations, walls):
   nodes = createNodes(rows, cols)
   addCoffeesAndWalls(nodes, coffeeLocations, walls)
   addNeighbors(nodes, rows, cols)
-  
+  printGrid(nodes, rows, cols)
+
+  return search(nodes, deskLocation)
+
+
+def printGrid(nodes, rows, cols):
   for i in range(1, rows + 1):
     for j in range(1, cols + 1):
       key = str(i) + str(j)
       print(nodes[key].symbol, end='')
     print('')
-
-  return search(nodes, deskLocation)
 
 
 def createNodes(rows, cols):
