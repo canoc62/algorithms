@@ -2,9 +2,7 @@ from nodes import Node
 
 def distanceToCoffee(rows, cols, deskLocation, coffeeLocations, walls):
   checkTypeArgs(rows, cols, deskLocation, coffeeLocations, walls)
-
   validateCoordinate(deskLocation, rows, cols)
-  print("Desk located at: {}, {}\n".format(deskLocation[0], deskLocation[1]))
 
   grid = constructGrid(rows, cols, coffeeLocations, walls)
 
