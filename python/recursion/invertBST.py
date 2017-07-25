@@ -1,11 +1,11 @@
-def invertBST(self, node):
+def invertBST(node):
 
   if node is None:
-      return
+    return
 
-  temp = self.right
-  self.right = self.left
-  self.left = temp
+  temp = node.right
+  node.right = node.left
+  node.left = temp
 
   invert(node.left)
   invert(node.right)
