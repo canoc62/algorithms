@@ -69,3 +69,17 @@ class BST:
 
         return abs(left_height - right_height) <= 1 and self.is_super_balanced(node.left) and self.is_super_balanced(
             node.right)
+
+    def invertBST(self, node):
+
+        if node is None:
+            return
+
+        temp = node.right
+        node.right = node.left
+        node.left = temp
+
+        self.invert(node.left)
+        self.invert(node.right)
+
+        return node
